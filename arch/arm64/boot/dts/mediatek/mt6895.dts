@@ -14379,12 +14379,12 @@ cpuqos_mode,dnth0,dnth1,upth0,upth1";
 	};
 };
 
-#include "mediatek/cust_mt6895_msdc.dtsi"
-#include "mediatek/mt6363.dtsi"
-#include "mediatek/mt6368.dtsi"
-#include "mediatek/rt5133.dtsi"
-#include "mediatek/rt6160.dtsi"
-#include "mediatek/cust_mt6895_connfem.dtsi"
+#include "cust_mt6895_msdc.dtsi"
+#include "mt6363.dtsi"
+#include "mt6368.dtsi"
+#include "rt5133.dtsi"
+#include "rt6160.dtsi"
+#include "cust_mt6895_connfem.dtsi"
 
 &rt5133 {
 	interrupts-extended = <&pio 141 0x0>;
@@ -14780,7 +14780,7 @@ cpuqos_mode,dnth0,dnth1,upth0,upth1";
 	en_vb = <1>;
 };
 
-#include "mediatek/bat_setting/mt6895_battery_prop.dtsi"
-#include "mediatek/mt6895-clkitg.dtsi"
-#include "mediatek/mt6895-disable-unused.dtsi"
-#include "mediatek/trusty.dtsi"
+#include "bat_setting/mt6895_battery_prop.dtsi"
+#include "mt6895-clkitg.dtsi"
+#include "mt6895-disable-unused.dtsi"
+#include "trusty.dtsi"
