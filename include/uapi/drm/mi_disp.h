@@ -430,8 +430,8 @@ static inline const char *getDispEventTypeName(__u32 event_type)
 		return "Fps";
 	case MI_DISP_EVENT_BRIGHTNESS_CLONE:
 		return "brightness_clone";
-	case MI_DISP_EVENT_DC_STATUS:
-		return "Dc_status";
+	case MI_DISP_EVENT_DC:
+		return "Dc";
 	case MI_DISP_EVENT_PANEL_EVENT:
 		return "Panel_event";
 	default:
