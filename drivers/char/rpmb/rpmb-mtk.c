@@ -2323,6 +2323,9 @@ static int rpmb_gp_listenDci(void *arg)
 {
 	enum mc_result mc_ret;
 	u32 cmdId;
+
+    extern struct mmc_host *mtk_mmc_host[];
+
 	struct mmc_host *mmc = mtk_mmc_host[0];
 
 	MSG(INFO, "%s: DCI listener.\n", __func__);
