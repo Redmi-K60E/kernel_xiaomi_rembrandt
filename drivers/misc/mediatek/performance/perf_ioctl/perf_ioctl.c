@@ -660,89 +660,6 @@ static long device_ioctl(struct file *filp,
 	}
 
 	switch (cmd) {
-#if defined(CONFIG_MTK_FPSGO_V3)
-	case FPSGO_QUEUE:
-		if (fpsgo_notify_qudeq_fp)
-			fpsgo_notify_qudeq_fp(1,
-					msgKM->start, msgKM->tid,
-					msgKM->identifier);
-		break;
-	case FPSGO_DEQUEUE:
-		if (fpsgo_notify_qudeq_fp)
-			fpsgo_notify_qudeq_fp(0,
-					msgKM->start, msgKM->tid,
-					msgKM->identifier);
-		break;
-	case FPSGO_QUEUE_CONNECT:
-		if (fpsgo_notify_connect_fp)
-			fpsgo_notify_connect_fp(msgKM->tid,
-					msgKM->connectedAPI, msgKM->identifier);
-		break;
-	case FPSGO_BQID:
-		if (fpsgo_notify_bqid_fp)
-			fpsgo_notify_bqid_fp(msgKM->tid, msgKM->bufID,
-				msgKM->queue_SF, msgKM->identifier,
-				msgKM->start);
-		break;
-	case FPSGO_TOUCH:
-		if (usrtch_ioctl_fp)
-			usrtch_ioctl_fp(msgKM->frame_time);
-		break;
-	case FPSGO_VSYNC:
-		if (fpsgo_notify_vsync_fp)
-			fpsgo_notify_vsync_fp();
-		break;
-	case FPSGO_SWAP_BUFFER:
-		if (fpsgo_notify_swap_buffer_fp)
-			fpsgo_notify_swap_buffer_fp(msgKM->tid);
-		break;
-	case FPSGO_GET_FPS:
-		if (fpsgo_get_fps_fp) {
-			fpsgo_get_fps_fp(&pwr_pid, &pwr_fps);
-			msgKM->tid = pwr_pid;
-			msgKM->value1 = pwr_fps;
-		} else
-			ret = -1;
-		perfctl_copy_to_user(msgUM, msgKM,
-				sizeof(struct _FPSGO_PACKAGE));
-		break;
-	case FPSGO_GET_CMD:
-		if (fpsgo_get_cmd_fp) {
-			fpsgo_get_cmd_fp(&pwr_cmd, &value1, &value2);
-			msgKM->cmd = pwr_cmd;
-			msgKM->value1 = value1;
-			msgKM->value2 = value2;
-		} else
-			ret = -1;
-		perfctl_copy_to_user(msgUM, msgKM,
-				sizeof(struct _FPSGO_PACKAGE));
-		break;
-	case FPSGO_GBE_GET_CMD:
-		if (gbe_get_cmd_fp) {
-			gbe_get_cmd_fp(&pwr_cmd, &value1, &value2);
-			msgKM->cmd = pwr_cmd;
-			msgKM->value1 = value1;
-			msgKM->value2 = value2;
-		}
-		else
-			ret = -1;
-		perfctl_copy_to_user(msgUM, msgKM,
-				sizeof(struct _FPSGO_PACKAGE));
-		break;
-	case FPSGO_GET_FSTB_ACTIVE:
-		if (fpsgo_get_fstb_active_fp)
-			msgKM->active = fpsgo_get_fstb_active_fp(msgKM->time_diff);
-		else
-			ret = 0;
-		perfctl_copy_to_user(msgUM, msgKM,
-				sizeof(struct _FPSGO_PACKAGE));
-		break;
-	case FPSGO_WAIT_FSTB_ACTIVE:
-		if (fpsgo_wait_fstb_active_fp)
-			fpsgo_wait_fstb_active_fp();
-		break;
-
-#else
 	case FPSGO_TOUCH:
 		 [[fallthrough]];
 	case FPSGO_QUEUE:
@@ -767,7 +684,6 @@ static long device_ioctl(struct file *filp,
 		[[fallthrough]];
 	case FPSGO_WAIT_FSTB_ACTIVE:
 		break;
-#endif
 
 	default:
 		pr_debug(TAG "%s %d: unknown cmd %x\n",

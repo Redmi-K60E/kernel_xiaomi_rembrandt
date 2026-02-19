@@ -1,9 +1,3 @@
-
-ifeq ($(CONFIG_MTK_FPSGO_V3),$(filter $(CONFIG_MTK_FPSGO_V3),m))
-ccflags-y += -DCONFIG_MTK_FPSGO_V3
-subdir-ccflags-y += -DCONFIG_MTK_FPSGO_V3
-endif
-
 MTK_PM_BUILD_FOLDER=$(srctree)/drivers/misc/mediatek/performance
 
 subdir-ccflags-y += -I$(MTK_PM_BUILD_FOLDER)/perf_ioctl/ \
@@ -17,7 +11,6 @@ obj-$(CONFIG_MTK_PERFORMANCE_MODULE) += mtk_perf_ioctl.o
 mtk_perf_ioctl-objs += $(MTK_PERF_IOCTL_SRC)
 
 #Generic subdir build
-obj-$(CONFIG_MTK_FPSGO_V3) += fpsgo_v3/
 obj-$(CONFIG_MTK_FRS) += frs/
 
 obj-$(CONFIG_MTK_LOAD_TRACKER) += load_track/
